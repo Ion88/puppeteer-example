@@ -9,3 +9,8 @@ jobs:
     steps:
       - checkout
       - run: npm install
+
+screenshot:
+  steps:
+    - checkout
+    - run: npm start
