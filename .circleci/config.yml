@@ -1,11 +1,11 @@
-version: 2.1
+version: 2.0
 jobs:
   build:
     docker:
-      — image: cimg/node:12.16.3
-    working_directory: ~/repo
+      - image: circleci/ruby:2.4.2-jessie-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps:
-      — checkout
+      - checkout
       - run: npm install
- 
-      — run: npm start
