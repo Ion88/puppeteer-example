@@ -1,16 +1,25 @@
-version: 2.0
+version: 2
 jobs:
-  build:
+  one:
     docker:
-      - image: circleci/ruby:2.4.2-jessie-node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
+      - image: cimg/node:16.3.0
     steps:
       - checkout
-      - run: npm install
+      - run:
+          name: Install dependencies
+          command: npm install
+  two:
+    docker:
+      - image: cimg/node:16.3.0
+    steps:
+      - checkout
+      - run:
+          name: Take screenshot
+          command: npm start
 
-screenshot:
-  steps:
-    - checkout
-    - run: npm start
+workflows:
+  version: 2
+  one_and_two:
+    jobs:
+      - one
+      - two
